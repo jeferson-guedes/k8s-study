@@ -17,13 +17,21 @@ spec:
       containers:
         - name: goserver
           image: guedesjeferson/hello-go:v9
-          readinessProbe:
+          startupProbe:
             httpGet:
               path: /healthz
               port: 8000
             periodSeconds: 3
-            initialDelaySeconds: 10
-            failureThreshold: 1
+            failureThreshold: 30
+
+
+#          readinessProbe:
+#            httpGet:
+#              path: /healthz
+#              port: 8000
+#            periodSeconds: 3
+#            initialDelaySeconds: 10
+#            failureThreshold: 1
 
 #          livenessProbe:
 #            httpGet:

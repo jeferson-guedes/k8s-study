@@ -1,0 +1,14 @@
+kind create cluster
+k cluster-info --context kind-kind
+k get nodes 
+kind get clusters
+kind create cluster --config=k8s/kind.yaml --name=platform
+kind delete clusters kind
+kubectl cluster-info --context kind-platform
+k config get-clusters
+k config use-context {cluster}
+
+docker build -t jeferson/hello-go .
+docker run --rm -p 80:80 jeferson/hello-go
+
+k port-foward pod/goserver 8000:80

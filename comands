@@ -1,3 +1,5 @@
+alias k=kubectl
+
 kind create cluster
 k cluster-info --context kind-kind
 k get nodes 
@@ -12,3 +14,33 @@ docker build -t jeferson/hello-go .
 docker run --rm -p 80:80 jeferson/hello-go
 
 k port-foward pod/goserver 8000:80
+k apply -f k8s/replicaset.yaml
+- problema do replicaset ao fazer uma alteração na imagem não é replicado a menos que - voce venha matando todos os pods na mão 
+
+# para gerar uma nova imagem no docker hub 
+docker build -t your_docker_hub/image-name:tag-version -f Dockerfile 
+docker push your_docker-hub/image:tag-version
+
+
+Hierarquia k8s 
+	-  Deployment -> ReplicaSet -> Pod 
+
+k rollout history deployment goserver
+k rollout undo deployment goserver --to-revesion=2
+
+k describe deployment goserver
+
+k get svc 
+
+k port-forward svc/goserver-service 8000:80
+
+k proxy  --port=8080 
+# habilita o acesso a api do k8s 
+
+k apply -f k8s/configmap-env.yaml
+
+k exec -it {podname} -- bash 
+
+k apply -f k8s/deployment.yaml && watch -n1 kubectl get pods
+
+

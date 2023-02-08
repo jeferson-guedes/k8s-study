@@ -16,14 +16,22 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: guedesjeferson/hello-go:v9
-          startupProbe:
-            httpGet:
-              path: /healthz
-              port: 8000
-            periodSeconds: 3
-            failureThreshold: 30
+          image: guedesjeferson/hello-go:v10
 
+          resources:
+            requests:
+              cpu: 100m
+              memory: 20Mi
+            limits:
+              cpu: 500m
+              memory: 25Mi
+
+#          startupProbe:
+#            httpGet:
+#              path: /healthz
+#              port: 8000
+#            periodSeconds: 3
+#            failureThreshold: 30
 
 #          readinessProbe:
 #            httpGet:
